@@ -289,20 +289,6 @@ sum(as.numeric(train_data_preds[1:430,]$Fraud.label)-1)/(sum(as.numeric(train_da
 sum(as.numeric(model_test[1:1366,]$Fraud.label))/(sum(as.numeric(model_test$Fraud.label)))
 sum(as.numeric(out_of_time_data[1:2700,]$Fraud.label)-1)/(sum(as.numeric(out_of_time_data$Fraud.label)-1))
 
-# Ensemble score
-
-model_test$ensemble_score <-  (0.35 * model_test$logit_score + 
-                                       0.21 * model_test$nn_score + 
-                                       0.51 * model_test$rf_score) / (0.51 + 0.21 + 0.35)
-
-train_data_preds$ensemble_score <-  (0.35 * train_data_preds$logit_score + 
-                                   0.21 * train_data_preds$nn_score + 
-                                   0.51 * train_data_preds$rf_score) / (0.51 + 0.21 + 0.35)
-
-out_of_time_data$ensemble_score <-  (0.35 * out_of_time_data$logit_score + 
-                                   0.21 * out_of_time_data$nn_score + 
-                                   0.51 * out_of_time_data$rf_score) / (0.51 + 0.21 + 0.35)
-
 # sort test data frame by ensemble score
 
 train_data_preds <- arrange(train_data_preds, desc(ensemble_score))
